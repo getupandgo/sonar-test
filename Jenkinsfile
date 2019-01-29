@@ -4,8 +4,9 @@ node {
     git 'https://github.com/getupandgo/sonar-test.git'
   }
   stage('SonarQube analysis') {
-    // requires SonarQube Scanner 2.8+
-    def scannerHome = tool 'sonar-scanner';
+      environment {
+          scannerHome = tool 'SonarQubeScanner'
+      }
     withSonarQubeEnv('sonar-instance') {
       sh "${scannerHome}/bin/sonar-scanner -X"
     }
